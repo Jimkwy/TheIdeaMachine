@@ -1,0 +1,85 @@
+{% extends "idea/layout.html" %}
+{% load static %}
+
+{% block body %}
+{% if message %}
+<div id=>{{ message }}</div>
+{% endif %}
+<div class="nav">
+    <button class="button" id="ram-button" type="button" onclick="load_ram()">RAM</button>
+    <button class="button" id="idea-button" type="button" onclick="load_form()">Input Console</button>
+    <button class="button" id="vault-button" type="button" onclick="load_vault()">Deliberte Access Memory</button>
+</div>
+<div id="idea-view" class="idea-view container main">
+    <h3>Input Console</h3>
+    <button id="see_all" type="button" class="button" onclick="see_all()" style="float:left;">Display All</button>
+    <input id="reset" class="button" type="reset" onclick="load_form()"style="float:left;">
+    <button id="next" type="button" class="button" onclick="next()">next >></button>
+    <button id="previous" type="button" class="button" onclick="previous()"><< back</button>
+    <form id="idea-form" class="container" method="POST">
+        <div id="question_view" class="form-item">
+            <h3 id="question-block">Got a new idea?</h3>
+        </div>
+        <div class="container" id="title_view">
+            <h4>Please name the idea:</h4>
+            <hr>
+            <input required class="input" id="idea-subject" placeholder="Title" form="idea-form" autofocus>
+        </div>
+        <div class="container" id="body_view">
+            <h4>Give me the details:</h4>
+            <hr>
+            <textarea required class="input" id="idea-body" placeholder="The details" form="idea-form" autofocus></textarea>
+        </div>
+        <div class="container" id="tag_view">
+            <h4>What box should I put it in?:</h4>
+            <hr>
+            <select required placeholder="Tag-Me" id="idea-tag" form="idea-form" class="input" autofocus>
+                <option disabled selected value> -- Tag me, please -- </option>
+                {% for tag in tags %}
+                <option value="{{tag}}">{{tag}}</option>
+                {% endfor %}
+            </select>
+            <span onclick="newtag_toggle()" style="font-size:larger; font-weight: 500; cursor: pointer;">&#43;</span>
+            <div id="newtag-form"  style="display:none; width: 20%;">
+                <input class="button" id="newtag-input" placeholder="New tag?">
+                <button class="button" id="newtag-submit" name="data" type="button" onclick="new_tag()">Add New Tag</button>
+            </div>
+        </div>
+        <div class="container" id="bonus-block">
+        </div>
+        <button id="review" type="button" class="button" onclick="see_all()">Review All</button>
+        <input id="submit" type="submit" class="button"/>
+    </form>
+</div>
+<div id="vault-view" class="vault-view container" style="display: none;">
+    <h3>Deliberate Access Memory</h3>
+        <div class="vault-tag">
+            <strong>Tag Sort:</strong>
+            <select placeholder="Tag-Me" id="vault-tag" form="idea-form" onchange="vault_idea_sort()" class="input2">
+                <option disabled selected value>Choose Tag</option>
+            </select>
+        </div>
+        <div class="vault-sort">
+            <strong>Sort By:</strong>
+            <select id="sort-order" onchange="vault_idea_sort()" class="input2">
+                <option default value="0">Random</option>
+                <option value="1">A - Z</option>
+                <option value="2">Z - A</option>
+                <option value="3">Old - New</option>
+                <option value="4">New - Old</option>
+            </select>
+        </div>
+        <div id="vault-container">
+        </div>
+</div>
+
+<div id="ram-view" class="ram-view container" style="display: none;">
+    <h3>Random Access Memory</h3><p>Press space to refresh</p>
+    <div id="ram-container">
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'idea/idea.js' %}"></script>
+{% endblock %}

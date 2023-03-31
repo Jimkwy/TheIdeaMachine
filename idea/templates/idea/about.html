@@ -1,0 +1,34 @@
+{% extends "idea/layout.html" %}
+{% load static %}
+
+{% block body %}
+{% if message %}
+<div id=>{{ message }}</div>
+{% endif %}
+{% if request.user %}
+<div class="nav">
+    <a class="button"  href="{% url 'index' %}" style="justify-content:center; display:flex;">RAM</a>
+    <a class="button"  href="{% url 'index' %}" style="justify-content:center; display:flex;">Input Console</a>
+    <a class="button"  href="{% url 'index' %}" style="justify-content:center; display:flex;">Deliberte Access Memory</a>
+</div>
+{% endif %}
+<div id="about" class="container block">
+    <div>
+    <h2>About</h2>
+    <hr>
+    </div> 
+    <h4>Welcome to the Idea Machine!</h4>
+    <p>Set it and forget it. Convert your fleeting organic ideas into inorganic everlasting bits! The Idea Machine will take whatever (text) you give it allowing you to go ahead and forget that life changing idea just as you always have, 1,000,000 times before. Afterward, you can walk away comforted, knowing that your genius will no longer die with the moment, or you. It will live on forever, a digital library of your greatness.
+    <hr>
+    <h4>The Idea Machine is your friend</h4>
+    <p></p>The Machine isn't just an everyday appliance, however. The Idea Machine cares about YOU. The Idea Machine wants to know that you are OK. As such, with every input, you will be promted to open up and really let it out (within the preset response parameters). Don't be shy! After you jot down the details of your wonderful thought baby, free yourself of any emotional termoil and  vent to your good friend, The Idea Machine.
+    </p>
+    <hr>
+    <h4>Random Access Memory (RAM)</h4>
+    <p>If you'd like to access your ideas and pull them out of the either by random, feel free to head to the RAM tab on the input screen. Here, you will be delivered a random idea from days of old. Who knows what you will find in there. It's like a cranial time-capsule!
+    </p>
+    <hr>
+    <h4>Deliberate Access Memory (DAM)</h4>
+    <p>Your digitized mental library. Here, you can find all your wildest ideas sorted in whatever order you feel works for you. We have also added the ability to sort by those fancy tags so you can sift through the drudge and find that little gem you know is hidding somewhere. If you thought it (and submited it) its here. No need playing needle in a hay stack with all those organic notebooks of yours. Sift away!</p>
+</div>
+{% endblock %}
